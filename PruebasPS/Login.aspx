@@ -1,19 +1,38 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="Login.aspx.cs" Inherits="PruebasPS.Login" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="Login.aspx.cs" Inherits="PruebasPS.WebForm1" EnableEventValidation = "false" %>
+<asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
 
-<!DOCTYPE html>
+    <style>
+        body {            
+            background-image: url("../img/fondo-2.jpg");
+            background-color: #FFFFFF4D !important;
+            width: 100%;
+            height: 100vh;
+            background-size: cover;
+            background-position: center;
+        }        
+    </style>
 
-<html xmlns="http://www.w3.org/1999/xhtml">
-<head runat="server">
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
-    <title></title>
-</head>
-<body>
-    <form id="form1" runat="server">
-        <div>
-
-            <asp:GridView ID="dgvAlumnos" runat="server"></asp:GridView>
-
+    <center>
+        <div>  
+            
+            <div class="form-group stl-frm-log">
+                <label for="exampleInputEmail1">Usuario</label>
+                <asp:TextBox ID="txtUser" runat="server" CssClass="form-control" placeholder="Usuario" />
+            </div>
+            <div class="form-group">
+                <label for="exampleInputPassword1">Contraseña</label>
+                <asp:TextBox ID="txtPassword" runat="server" CssClass="form-control" placeholder="*****" type="password" />                
+                <small id="emailHelp" class="form-text text-muted">Su contraseña no será compartida con nadie.</small>
+            </div>
+            <%-- 
+            <div class="form-group form-check">
+                <input type="checkbox" class="form-check-input" id="exampleCheck1">
+                <label class="form-check-label" for="exampleCheck1">Recordar Usuario</label>
+            </div>
+            --%>
+            <asp:Button ID="btnIngresar" runat="server" CssClass="btn btn-primary" Text="Iniciar Sesión" />
+                            
         </div>
-    </form>
-</body>
-</html>
+    </center>
+
+</asp:Content>
