@@ -7,9 +7,10 @@
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title><%: Page.Title %>Práctica Supervisada</title>
+    <title><%: Page.Title %>Práctica Supervisada (UTN)</title>
 
     <link href="Content/bootstrap.min.css" rel="stylesheet" type="text/css" />
+    <link href="css/Styles.css" rel="stylesheet" type="text/css" />
 
     <asp:PlaceHolder runat="server">
         <%: Scripts.Render("~/bundles/modernizr") %>
@@ -42,7 +43,7 @@
             </Scripts>
         </asp:ScriptManager>
 
-        <div class="navbar navbar-inverse navbar-fixed-top">
+       <div class="navbar navbar-inverse navbar-fixed-top">
             <div class="container">
                 <div class="navbar-header">
                     <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse" title="more options">
@@ -52,12 +53,19 @@
                     </button>
                     <a class="navbar-brand" runat="server" href="https://op.frgp.utn.edu.ar/">UTN-FRGP</a>
                 </div>
+
                 <div class="navbar-collapse collapse">
-                    <ul class="nav navbar-nav">
-                        <li><a runat="server" href="~/CargarExcel.aspx">Cargar Excel</a></li>
-                        <li><a runat="server" href="~/Reporte1.aspx">Reporte 1</a></li>
-                        <li><a runat="server" href="~/Reporte2.aspx">Reporte 2</a></li>
+                    <ul class="nav navbar-nav" style="width: 80%;">
+                        <li>
+                            <a align="center">
+                                <asp:Button ID="BtnInicio" Text="Volver a Inicio" runat="server" Class="btn-inicio" OnClick="BtnInicio_Click"/>
+                            </a>
+                        </li>
                     </ul>
+                    <a align="right" >
+                        <asp:Button ID="BtnLogin" Visible="false" Text="Login" runat="server" Class="btn-login" OnClick="BtnLogin_Click"/>
+                        <asp:Button ID="BtnCerrarSesion" Visible="false" Text="Cerrar Sesión" runat="server" Class="btn-cerrar-sesion" OnClick="BtnCerrarSesion_Click" />
+                    </a>
                 </div>
             </div>
         </div>

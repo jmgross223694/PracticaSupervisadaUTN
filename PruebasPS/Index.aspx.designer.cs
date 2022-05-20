@@ -11,34 +11,34 @@ namespace PruebasPS
 {
 
 
-    public partial class Login1
+    public partial class Index
     {
 
         /// <summary>
-        /// Control txtUser.
+        /// Control BtnExcel.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtUser;
+        protected global::System.Web.UI.WebControls.Button BtnExcel;
 
         /// <summary>
-        /// Control txtPassword.
+        /// Control BtnReporte1.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtPassword;
+        protected global::System.Web.UI.WebControls.Button BtnReporte1;
 
         /// <summary>
-        /// Control btnIngresar.
+        /// Control BtnReporte2.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnIngresar;
+        protected global::System.Web.UI.WebControls.Button BtnReporte2;
     }
 }
