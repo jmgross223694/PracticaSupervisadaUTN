@@ -216,3 +216,10 @@ C:\Users\Juanma\Desktop\GitHub\PracticaSupervisadaUTN\PruebasPS\obj\Debug\Prueba
 C:\Users\Juanma\Desktop\GitHub\PracticaSupervisadaUTN\PruebasPS\obj\Debug\PruebasPS.csproj.CopyComplete
 C:\Users\Juanma\Desktop\GitHub\PracticaSupervisadaUTN\PruebasPS\obj\Debug\PruebasPS.dll
 C:\Users\Juanma\Desktop\GitHub\PracticaSupervisadaUTN\PruebasPS\obj\Debug\PruebasPS.pdb
+C:\Users\Juanma\Desktop\GitHub\PracticaSupervisadaUTN\PruebasPS\bin\DocumentFormat.OpenXml.dll
+C:\Users\Juanma\Desktop\GitHub\PracticaSupervisadaUTN\PruebasPS\bin\SpreadsheetLight.dll
+C:\Users\Juanma\Desktop\GitHub\PracticaSupervisadaUTN\PruebasPS\bin\System.Drawing.Common.dll
+C:\Users\Juanma\Desktop\GitHub\PracticaSupervisadaUTN\PruebasPS\bin\System.IO.Packaging.dll
+C:\Users\Juanma\Desktop\GitHub\PracticaSupervisadaUTN\PruebasPS\bin\DocumentFormat.OpenXml.xml
+C:\Users\Juanma\Desktop\GitHub\PracticaSupervisadaUTN\PruebasPS\bin\SpreadsheetLight.xml
+C:\Users\Juanma\Desktop\GitHub\PracticaSupervisadaUTN\PruebasPS\bin\System.IO.Packaging.xml

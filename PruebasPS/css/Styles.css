@@ -83,13 +83,47 @@
     }
 }
 
+.navbar-master {
+    width: 80%;
+}
+
 @media screen and (max-width: 1200px) {
+    .navbar-master {
+        width: 76% !important;
+    }
+
     .btn-inicio {
-        margin-left: 0px !important;
+        margin-left: 235% !important;
+    }
+}
+
+@media screen and (max-width: 992px) {
+    .navbar-master {
+        width: 69% !important;
+    }
+
+    .btn-inicio {
+        margin-left: 145% !important;
+    }
+}
+
+@media screen and (max-width: 768px) {
+    .btn-inicio {
+        margin-left: 0% !important;
+    }
+
+    .btn-cerrar-sesion {
+        margin-bottom: 3% !important;
     }
 }
 
 .index-btn {
     font-size: large !important;
+}
+
+.lbl-mensaje {
+    color: #EF2929;
+    font-size: 16px;
+    text-shadow: black 0.1em 0.1em 1.9em;
 }
 

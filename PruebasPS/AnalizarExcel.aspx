@@ -18,7 +18,19 @@
         <br /><br />
 
         <div>
+            <div class="excel-cargar-archivo">
+                <asp:FileUpload ID="CargarArchivo" runat="server" ToolTip="Cargar archivo Excel aquí" />
+            </div>
 
+            <br />
+
+            <div>
+                <asp:Button ID="BtnProcesarArchivo" Text="Procesar archivo" class="excel-btn-procesar-archivo" runat="server" OnClick="BtnProcesarArchivo_Click" />
+
+                <br /><br />
+
+                <asp:Label ID="LblMensaje" Visible="false" Text="" runat="server" CssClass="lbl-mensaje" />
+            </div>
         </div>
     </center>
 

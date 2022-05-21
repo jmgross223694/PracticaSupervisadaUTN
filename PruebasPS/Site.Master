@@ -55,7 +55,7 @@
                 </div>
 
                 <div class="navbar-collapse collapse">
-                    <ul class="nav navbar-nav" style="width: 80%;">
+                    <ul class="nav navbar-nav navbar-master">
                         <li>
                             <a align="center">
                                 <asp:Button ID="BtnInicio" Text="Volver a Inicio" runat="server" Class="btn-inicio" OnClick="BtnInicio_Click"/>
