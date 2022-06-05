@@ -15,7 +15,7 @@ namespace PruebasPS
 
         protected void Page_Load(object sender, EventArgs e)
         {
-            //ListarAlumnos();
+            ListarAlumnos();
 
             if (!IsPostBack)
             {

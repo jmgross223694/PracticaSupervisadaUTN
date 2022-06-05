@@ -31,7 +31,9 @@ namespace PruebasPS
 
         protected void BtnReporte1_Click(object sender, EventArgs e)
         {
-            Response.Redirect("Reporte1.aspx", false);
+
+            Response.Redirect("ListarAlumnosPrueba.aspx", false);
+            //Response.Redirect("Reporte1.aspx", false);
         }
 
         protected void BtnReporte2_Click(object sender, EventArgs e)

@@ -1,0 +1,129 @@
+﻿body {
+    padding: 0;
+}
+
+.btn-cerrar-sesion {
+    border-radius: 50px;
+    border: solid 1px;
+    color: #FFFFFF;
+    background-color: #EF2929;
+    -webkit-transition-duration: 0.4s;
+    transition-duration: 0.4s;
+    font-weight: 600;
+    text-shadow: black 0.1em 0.1em 1.9em;
+    box-shadow: 0 4px 6px -6px black;
+    font-size: 15px;
+    padding: 4px;
+    margin-top: 10px;
+}
+
+.btn-cerrar-sesion:hover {
+    color: #EF2929;
+    background-color: #FFFFFF;
+}
+
+.btn-login {
+    border-radius: 50px;
+    border: solid 1px;
+    color: #28a745;
+    background-color: #FFFFFF;
+    -webkit-transition-duration: 0.4s;
+    transition-duration: 0.4s;
+    font-weight: 600;
+    text-shadow: black 0.1em 0.1em 1.9em;
+    box-shadow: 0 4px 6px -6px black;
+    font-size: 15px;
+    padding: 4px;
+    margin-top: 10px;
+}
+
+.btn-login:hover {
+    color: #FFFFFF;
+    background-color: #28a745;
+}
+
+.index-botonera {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+}
+
+.btn-inicio {
+    margin-left: 325%;
+    background-color: #222222;
+    color: #ffffea;
+    border: hidden;
+    font-size: large;
+}
+
+@media screen and (max-width: 480px) {
+    .index-botonera {
+        grid-template-columns: repeat(3, 1fr);
+        grid-template-rows: repeat(5, 1fr);
+    }
+
+    .index-div-btn-excel {
+        grid-column-start: 1;
+        grid-column-end: 4;
+        grid-row-start: 1;
+        grid-row-end: 1;
+    }
+
+    .index-div-btn-reporte1 {
+        grid-column-start: 1;
+        grid-column-end: 4;
+        grid-row-start: 3;
+        grid-row-end: 3;
+    }
+
+    .index-div-btn-reporte2 {
+        grid-column-start: 1;
+        grid-column-end: 4;
+        grid-row-start: 5;
+        grid-row-end: 5;
+    }
+}
+
+.navbar-master {
+    width: 80%;
+}
+
+@media screen and (max-width: 1200px) {
+    .navbar-master {
+        width: 76% !important;
+    }
+
+    .btn-inicio {
+        margin-left: 235% !important;
+    }
+}
+
+@media screen and (max-width: 992px) {
+    .navbar-master {
+        width: 69% !important;
+    }
+
+    .btn-inicio {
+        margin-left: 145% !important;
+    }
+}
+
+@media screen and (max-width: 768px) {
+    .btn-inicio {
+        margin-left: 0% !important;
+    }
+
+    .btn-cerrar-sesion {
+        margin-bottom: 3% !important;
+    }
+}
+
+.index-btn {
+    font-size: large !important;
+}
+
+.lbl-mensaje {
+    color: #EF2929;
+    font-size: 16px;
+    text-shadow: black 0.1em 0.1em 1.9em;
+}
+
