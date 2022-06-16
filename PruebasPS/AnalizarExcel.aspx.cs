@@ -185,16 +185,12 @@ namespace PruebasPS
             }
         }
 
-        private void AbrirArchivo(string extension)
+        private void AbrirArchivo(string extension, string path)
         {
-            string ruta = "C:/Users/Juanma/Desktop/GitHub/PracticaSupervisadaUTN/PruebasPS/Planillas_Subidas/";
-            //string ruta = "C:/Users/Juanma/Desktop/GitHub/PracticaSupervisadaUTN/PruebasPS/Planillas_Subidas/";
-            //string ruta = "C:/Users/Juanma/Desktop/GitHub/PracticaSupervisadaUTN/PruebasPS/Planillas_Subidas/";
-            //string ruta = "C:/Users/Juanma/Desktop/GitHub/PracticaSupervisadaUTN/PruebasPS/Planillas_Subidas/";
 
             try
             {
-                SLDocument archivo = new SLDocument(@"" + ruta + "Libro1" + extension); //Abrimos el archivo que se acaba de guardar
+                SLDocument archivo = new SLDocument(@"" + path); //Abrimos el archivo que se acaba de guardar
 
                 CargarLista(archivo);
             }
@@ -203,7 +199,7 @@ namespace PruebasPS
                 MostrarMensaje("Error al abrir el archivo.");
             }
         }
-
+        
         protected void BtnProcesarArchivo_Click(object sender, EventArgs e)
         {
             if (CargarArchivo.HasFile) //Validamos que se halla seleccionado algún archivo
@@ -217,11 +213,11 @@ namespace PruebasPS
                 {
                     if (tam <= 1048576) //Validamos su tamaño (en bytes)
                     {
-                        string path = "~/Planillas_Subidas/";
+                        string path = "~/Planillas_Subidas/Libro1"+extension;
+                        CargarArchivo.SaveAs(Server.MapPath(path)); //Guardamos el archivo seleccionado en la carpeta 
+                        path = Server.MapPath(path);
 
-                        CargarArchivo.SaveAs(Server.MapPath(path + "Libro1" + extension)); //Guardamos el archivo seleccionado en la carpeta indicada
-
-                        AbrirArchivo(extension);
+                         AbrirArchivo(extension, path);
                     }
                 }
             }
