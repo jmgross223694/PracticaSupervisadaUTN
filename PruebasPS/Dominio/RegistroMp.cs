@@ -51,6 +51,7 @@ namespace Dominio
         public string pos_id { get; set; }
         public string external_id { get; set; }
         public string financing_fee { get; set; }
+        public string EstadoBD { get; set; }
 
         public RegistroMp()
         {
@@ -70,7 +71,7 @@ namespace Dominio
             string merchant_order_id, string campaign_id, string campaign_name, 
             string activity_url, string id, string shipment_status, string buyer_address, 
             string tracking_number, string operator_name, string store_id, string pos_id, 
-            string external_id, string financing_fee)
+            string external_id, string financing_fee, string EstadoBD)
         {
             this.date_created = date_created;
             this.date_approved = date_approved;
@@ -115,6 +116,7 @@ namespace Dominio
             this.pos_id = pos_id;
             this.external_id = external_id;
             this.financing_fee = financing_fee;
+            this.EstadoBD = EstadoBD;
         }
     }
 }

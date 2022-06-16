@@ -223,3 +223,5 @@ C:\Users\Juanma\Desktop\GitHub\PracticaSupervisadaUTN\PruebasPS\bin\System.IO.Pa
 C:\Users\Juanma\Desktop\GitHub\PracticaSupervisadaUTN\PruebasPS\bin\DocumentFormat.OpenXml.xml
 C:\Users\Juanma\Desktop\GitHub\PracticaSupervisadaUTN\PruebasPS\bin\SpreadsheetLight.xml
 C:\Users\Juanma\Desktop\GitHub\PracticaSupervisadaUTN\PruebasPS\bin\System.IO.Packaging.xml
+C:\Users\Juanma\Desktop\GitHub\PracticaSupervisadaUTN\PruebasPS\bin\Aspose.Cells.dll
+C:\Users\Juanma\Desktop\GitHub\PracticaSupervisadaUTN\PruebasPS\bin\Aspose.Cells.xml

@@ -5,8 +5,11 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 using System.Windows.Forms;
+using DocumentFormat.OpenXml.Spreadsheet;
+using Aspose.Cells;
 using SpreadsheetLight;
 using Dominio;
+using Workbook = Aspose.Cells.Workbook;
 
 namespace PruebasPS
 {
@@ -90,57 +93,62 @@ namespace PruebasPS
             }
         }
 
+        private RegistroMp CargarRegistroMp(SLDocument archivo)
+        {
+            RegistroMp aux = new RegistroMp();
+
+            aux.date_created = archivo.GetCellValueAsString(this.iRow, 1);
+            aux.date_approved = archivo.GetCellValueAsString(this.iRow, 2);
+            aux.date_released = archivo.GetCellValueAsString(this.iRow, 3);
+            aux.counterpart_name = archivo.GetCellValueAsString(this.iRow, 4);
+            aux.counterpart_nickname = archivo.GetCellValueAsString(this.iRow, 5);
+            aux.counterpart_email = archivo.GetCellValueAsString(this.iRow, 6);
+            aux.counterpart_phone_number = archivo.GetCellValueAsString(this.iRow, 7);
+            aux.buyer_document = archivo.GetCellValueAsString(this.iRow, 8);
+            aux.item_id = archivo.GetCellValueAsString(this.iRow, 9);
+            aux.reason = archivo.GetCellValueAsString(this.iRow, 10);
+            aux.external_reference = archivo.GetCellValueAsString(this.iRow, 11);
+            aux.seller_custom_field = archivo.GetCellValueAsString(this.iRow, 12);
+            aux.operation_id = archivo.GetCellValueAsString(this.iRow, 13);
+            aux.status = archivo.GetCellValueAsString(this.iRow, 14);
+            aux.status_detail = archivo.GetCellValueAsString(this.iRow, 15);
+            aux.operation_type = archivo.GetCellValueAsString(this.iRow, 16);
+            aux.transaction_amount = archivo.GetCellValueAsString(this.iRow, 17);
+            aux.mercadopago_fee = archivo.GetCellValueAsString(this.iRow, 18);
+            aux.marketplace_fee = archivo.GetCellValueAsString(this.iRow, 19);
+            aux.shipping_cost = archivo.GetCellValueAsString(this.iRow, 20);
+            aux.coupon_fee = archivo.GetCellValueAsString(this.iRow, 21);
+            aux.net_received_amount = archivo.GetCellValueAsString(this.iRow, 22);
+            aux.installments = archivo.GetCellValueAsString(this.iRow, 23);
+            aux.payment_type = archivo.GetCellValueAsString(this.iRow, 24);
+            aux.amount_refunded = archivo.GetCellValueAsString(this.iRow, 25);
+            aux.refund_operator = archivo.GetCellValueAsString(this.iRow, 26);
+            aux.claim_id = archivo.GetCellValueAsString(this.iRow, 27);
+            aux.chargeback_id = archivo.GetCellValueAsString(this.iRow, 28);
+            aux.marketplace = archivo.GetCellValueAsString(this.iRow, 29);
+            aux.order_id = archivo.GetCellValueAsString(this.iRow, 30);
+            aux.merchant_order_id = archivo.GetCellValueAsString(this.iRow, 31);
+            aux.campaign_id = archivo.GetCellValueAsString(this.iRow, 32);
+            aux.campaign_name = archivo.GetCellValueAsString(this.iRow, 33);
+            aux.activity_url = archivo.GetCellValueAsString(this.iRow, 34);
+            aux.id = archivo.GetCellValueAsString(this.iRow, 35);
+            aux.shipment_status = archivo.GetCellValueAsString(this.iRow, 36);
+            aux.buyer_address = archivo.GetCellValueAsString(this.iRow, 37);
+            aux.tracking_number = archivo.GetCellValueAsString(this.iRow, 38);
+            aux.operator_name = archivo.GetCellValueAsString(this.iRow, 39);
+            aux.store_id = archivo.GetCellValueAsString(this.iRow, 40);
+            aux.pos_id = archivo.GetCellValueAsString(this.iRow, 41);
+            aux.external_id = archivo.GetCellValueAsString(this.iRow, 42);
+            aux.financing_fee = archivo.GetCellValueAsString(this.iRow, 43);
+
+            return aux;
+        }
+
         private void RecorrerArchivo(SLDocument archivo)
         {
             for (this.iRow = 2; this.iRow <= this.cantFilas; this.iRow++)
             {
-                RegistroMp aux = new RegistroMp();
-
-                aux.date_created = archivo.GetCellValueAsString(this.iRow, 1);
-                aux.date_approved = archivo.GetCellValueAsString(this.iRow, 2);
-                aux.date_released = archivo.GetCellValueAsString(this.iRow, 3);
-                aux.counterpart_name = archivo.GetCellValueAsString(this.iRow, 4);
-                aux.counterpart_nickname = archivo.GetCellValueAsString(this.iRow, 5);
-                aux.counterpart_email = archivo.GetCellValueAsString(this.iRow, 6);
-                aux.counterpart_phone_number = archivo.GetCellValueAsString(this.iRow, 7);
-                aux.buyer_document = archivo.GetCellValueAsString(this.iRow, 8);
-                aux.item_id = archivo.GetCellValueAsString(this.iRow, 9);
-                aux.reason = archivo.GetCellValueAsString(this.iRow, 10);
-                aux.external_reference = archivo.GetCellValueAsString(this.iRow, 11);
-                aux.seller_custom_field = archivo.GetCellValueAsString(this.iRow, 12);
-                aux.operation_id = archivo.GetCellValueAsString(this.iRow, 13);
-                aux.status = archivo.GetCellValueAsString(this.iRow, 14);
-                aux.status_detail = archivo.GetCellValueAsString(this.iRow, 15);
-                aux.operation_type = archivo.GetCellValueAsString(this.iRow, 16);
-                aux.transaction_amount = archivo.GetCellValueAsString(this.iRow, 17);
-                aux.mercadopago_fee = archivo.GetCellValueAsString(this.iRow, 18);
-                aux.marketplace_fee = archivo.GetCellValueAsString(this.iRow, 19);
-                aux.shipping_cost = archivo.GetCellValueAsString(this.iRow, 20);
-                aux.coupon_fee = archivo.GetCellValueAsString(this.iRow, 21);
-                aux.net_received_amount = archivo.GetCellValueAsString(this.iRow, 22);
-                aux.installments = archivo.GetCellValueAsString(this.iRow, 23);
-                aux.payment_type = archivo.GetCellValueAsString(this.iRow, 24);
-                aux.amount_refunded = archivo.GetCellValueAsString(this.iRow, 25);
-                aux.refund_operator = archivo.GetCellValueAsString(this.iRow, 26);
-                aux.claim_id = archivo.GetCellValueAsString(this.iRow, 27);
-                aux.chargeback_id = archivo.GetCellValueAsString(this.iRow, 28);
-                aux.marketplace = archivo.GetCellValueAsString(this.iRow, 29);
-                aux.order_id = archivo.GetCellValueAsString(this.iRow, 30);
-                aux.merchant_order_id = archivo.GetCellValueAsString(this.iRow, 31);
-                aux.campaign_id = archivo.GetCellValueAsString(this.iRow, 32);
-                aux.campaign_name = archivo.GetCellValueAsString(this.iRow, 33);
-                aux.activity_url = archivo.GetCellValueAsString(this.iRow, 34);
-                aux.id = archivo.GetCellValueAsString(this.iRow, 35);
-                aux.shipment_status = archivo.GetCellValueAsString(this.iRow, 36);
-                aux.buyer_address = archivo.GetCellValueAsString(this.iRow, 37);
-                aux.tracking_number = archivo.GetCellValueAsString(this.iRow, 38);
-                aux.operator_name = archivo.GetCellValueAsString(this.iRow, 39);
-                aux.store_id = archivo.GetCellValueAsString(this.iRow, 40);
-                aux.pos_id = archivo.GetCellValueAsString(this.iRow, 41);
-                aux.external_id = archivo.GetCellValueAsString(this.iRow, 42);
-                aux.financing_fee = archivo.GetCellValueAsString(this.iRow, 43);
-
-                this.listaMp.Add(aux);
+                this.listaMp.Add(CargarRegistroMp(archivo));
             }
         }
 
@@ -177,26 +185,28 @@ namespace PruebasPS
                 dgvRegistrosMp.DataBind();
                 dgvRegistrosMp.Visible = true;
 
-                MostrarMensaje("La operación se ha completado correctamente!");
+                MostrarMensaje("La operación se ha completado correctamente!", "OK");
             }
             else
             {
-                MostrarMensaje("Archivo inválido. Verifique que las columnas del archivo sean las correctas.");
+                MostrarMensaje("Archivo inválido. Verifique que las columnas del archivo sean las correctas.", "ERROR");
             }
         }
 
-        private void AbrirArchivo(string extension, string path)
+        private void AbrirArchivo(string path)
         {
-
             try
             {
                 SLDocument archivo = new SLDocument(@"" + path); //Abrimos el archivo que se acaba de guardar
+
+                string hoja1 = archivo.GetSheetNames()[0].ToString(); //Obtenemos el nombre de la primera hoja del archivo
+                archivo.SelectWorksheet(hoja1); //Seleccionamos esa hoja
 
                 CargarLista(archivo);
             }
             catch
             {
-                MostrarMensaje("Error al abrir el archivo.");
+                MostrarMensaje("Error al abrir el archivo.", "ERROR");
             }
         }
         
@@ -205,6 +215,7 @@ namespace PruebasPS
             if (CargarArchivo.HasFile) //Validamos que se halla seleccionado algún archivo
             {
                 string extension = System.IO.Path.GetExtension(CargarArchivo.FileName); //Obtenemos la extension del archivo seleccionado
+                string fileName = CargarArchivo.FileName;
                 extension = extension.ToLower();
 
                 int tam = CargarArchivo.PostedFile.ContentLength; //Obtenemos el tamaño del archivo seleccionado
@@ -217,24 +228,35 @@ namespace PruebasPS
                         CargarArchivo.SaveAs(Server.MapPath(path)); //Guardamos el archivo seleccionado en la carpeta 
                         path = Server.MapPath(path);
 
-                         AbrirArchivo(extension, path);
+                        if (extension == ".xls")
+                        {
+                            var workbook = new Workbook(path);
+                            path = path.Replace(".xls", ".xlsx");
+                            workbook.Save(path);
+                        }
+
+                        AbrirArchivo(path);
                     }
+                }
+                if (extension == ".csv")
+                {
+                    MostrarMensaje("Sólo se permiten archivos con extension '.xls' ó '.xlsx'.", "ERROR");
                 }
             }
             else
             {
-                MostrarMensaje("No se seleccionó ningún archivo.");
+                MostrarMensaje("No se seleccionó ningún archivo.", "ERROR");
             }
         }
 
-        private void MostrarMensaje(string mensaje)
+        private void MostrarMensaje(string mensaje, string tipoMensaje)
         {
-            if (mensaje.Contains("inválido") || mensaje.Contains("Error"))
+            if (tipoMensaje == "ERROR")
             {
                 LblMensaje.ForeColor = System.Drawing.Color.Red;
                 dgvRegistrosMp.Visible = false;
             }
-            else
+            if (tipoMensaje == "OK")
             {
                 LblMensaje.ForeColor = System.Drawing.Color.Green;
                 dgvRegistrosMp.Visible = true;
@@ -246,12 +268,11 @@ namespace PruebasPS
 }
 
 /*
- *  1) Validar titulos de columnas de Excel.
-    1) Leer archivo excel y cargar cada fila en una lista de esa entidad (por ejemplo pago).
-    2) Recorrer la lista (foreach) e ir consultando cada registro con la BD y asignando el estado de las mismas
+ *  1) Recorrer la lista (foreach) e ir consultando cada registro con la BD y asignando el estado de las mismas
        en cada registro, en la propiedad "estado".
-    3) Recorrer la lista (foreach) y los que tienen "estado" = Pendiente/Cancelado, cargar los datos correspondientes
+    2) Recorrer la lista (foreach) y los que tienen "estado" = Pendiente/Cancelado, cargar los datos correspondientes
        en la BD.
-    4) Mostrar cartel aclaratorio informando si la operación se completo correctamente o no.
+    3) Mostrar cartel aclaratorio informando si la operación se completo correctamente o no.
 */
+
 

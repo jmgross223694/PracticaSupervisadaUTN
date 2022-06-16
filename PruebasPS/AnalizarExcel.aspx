@@ -19,7 +19,7 @@
 
         <div>
             <div class="excel-cargar-archivo">
-                <asp:FileUpload ID="CargarArchivo" runat="server" ToolTip="Cargar archivo Excel aquí" />
+                <asp:FileUpload ID="CargarArchivo" runat="server" accept=".xls,.xlsx" ToolTip="Seleccione un archivo Excel" />
             </div>
 
             <br />
