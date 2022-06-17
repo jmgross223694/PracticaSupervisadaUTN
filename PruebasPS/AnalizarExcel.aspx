@@ -33,7 +33,7 @@
 
                 <br /><br />
 
-                <asp:DataGrid ID="dgvRegistrosMp" runat="server" Visible="False" CellPadding="3" BackColor="#DEBA84" BorderColor="#DEBA84" BorderStyle="None" BorderWidth="1px" CellSpacing="2">
+                <asp:DataGrid ID="dgvRegistrosActualizados" runat="server" Visible="False" CellPadding="3" BackColor="#DEBA84" BorderColor="#DEBA84" BorderStyle="None" BorderWidth="1px" CellSpacing="2">
                     <FooterStyle BackColor="#F7DFB5" ForeColor="#8C4510" />
                     <HeaderStyle BackColor="#A55129" Font-Bold="True" ForeColor="White" />
                     <ItemStyle BackColor="#FFF7E7" ForeColor="#8C4510" />
@@ -41,6 +41,7 @@
                     <SelectedItemStyle BackColor="#738A9C" Font-Bold="True" ForeColor="White" />
 
                 </asp:DataGrid>
+
             </div>
         </div>
     </center>

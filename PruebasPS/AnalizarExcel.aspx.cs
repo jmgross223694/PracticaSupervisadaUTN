@@ -18,6 +18,7 @@ namespace PruebasPS
     public partial class AnalizarExcel : System.Web.UI.Page
     {
         private List<RegistroMp> Registro = new List<RegistroMp>();
+        private List<MercadoPago> ListBD = new List<MercadoPago>();
         private int iRow = 1, iCol = 1, cantFilas = 0, cantColumnas = 0;
         private string[] nombresColsCorrectas = {
             "Fecha de compra (date_created)",
@@ -70,8 +71,6 @@ namespace PruebasPS
             if (Session["login"] != null)
             {
                 //mostrar todo lo que haya que mostrar.
-
-              
             }
             else
             {
@@ -79,6 +78,88 @@ namespace PruebasPS
 
                 Session.Add("Error", "Debe loguearse para acceder a esta página.");
                 Response.Redirect("Error.aspx", false); 
+            }
+        }
+
+        protected void BtnProcesarArchivo_Click(object sender, EventArgs e)
+        {
+            if (CargarArchivo.HasFile) //Validamos que se halla seleccionado algún archivo
+            {
+                string extension = System.IO.Path.GetExtension(CargarArchivo.FileName); //Obtenemos la extension del archivo seleccionado
+                string fileName = CargarArchivo.FileName;
+                extension = extension.ToLower();
+
+                int tam = CargarArchivo.PostedFile.ContentLength; //Obtenemos el tamaño del archivo seleccionado
+
+                if (extension == ".xlsx" || extension == ".xls") //Validamos el formato del archivo seleccionado
+                {
+                    if (tam <= 1048576) //Validamos su tamaño (en bytes)
+                    {
+                        string path = "~/Planillas_Subidas/Libro1" + extension;
+                        CargarArchivo.SaveAs(Server.MapPath(path)); //Guardamos el archivo seleccionado en la carpeta 
+                        path = Server.MapPath(path);
+
+                        if (extension == ".xls")
+                        {
+                            var workbook = new Workbook(path);
+                            path = path.Replace(".xls", ".xlsx");
+                            workbook.Save(path);
+                        }
+
+                        AbrirArchivo(path);
+                    }
+                }
+                if (extension == ".csv")
+                {
+                    MostrarMensaje("Sólo se permiten archivos con extensión '.xls' ó '.xlsx'.", "ERROR");
+                }
+            }
+            else
+            {
+                MostrarMensaje("No se seleccionó ningún archivo.", "ERROR");
+            }
+        }
+
+        private void AbrirArchivo(string path)
+        {
+            try
+            {
+                SLDocument archivo = new SLDocument(@"" + path); //Abrimos el archivo que se acaba de guardar
+
+                string hoja1 = archivo.GetSheetNames()[0].ToString(); //Obtenemos el nombre de la primera hoja del archivo
+                archivo.SelectWorksheet(hoja1); //Seleccionamos esa hoja
+
+                CargarLista(archivo);
+            }
+            catch
+            {
+                MostrarMensaje("Error al abrir el archivo.", "ERROR");
+            }
+        }
+
+        private void CargarLista(SLDocument archivo)
+        {
+            ContarFilasColumnasArchivo(archivo);
+
+            if (ValidarArchivo(archivo))
+            {
+                RecorrerArchivo(archivo);
+
+                List<string> listaDgv = new List<string>();
+                foreach (MercadoPago mp in this.ListBD)
+                {
+                    listaDgv.Add(mp.Mepa_idmercadopago);
+                }
+
+                dgvRegistrosActualizados.DataSource = listaDgv;
+                dgvRegistrosActualizados.DataBind();
+                dgvRegistrosActualizados.Visible = true;
+
+                MostrarMensaje("La operación se ha completado correctamente!", "OK");
+            }
+            else
+            {
+                MostrarMensaje("Archivo inválido. Verifique que las columnas del archivo sean las correctas.", "ERROR");
             }
         }
 
@@ -97,8 +178,47 @@ namespace PruebasPS
             }
         }
 
+        private bool ValidarArchivo(SLDocument archivo)
+        {
+            bool resultado = false;
+
+            for (this.iCol = 1; this.iCol <= this.cantColumnas; this.iCol++)
+            {
+                string valor = archivo.GetCellValueAsString(1, this.iCol); //Recorremos el archivo celda por celda y obtenemos su respectivo valor
+
+                if (valor == nombresColsCorrectas[this.iCol - 1])
+                {
+                    resultado = true;
+                }
+                else
+                {
+                    return false;
+                }
+            }
+
+            return resultado;
+        }
+
+        private void RecorrerArchivo(SLDocument archivo)
+        {
+            for (this.iRow = 2; this.iRow <= this.cantFilas; this.iRow++)
+            {
+                this.Registro.Add(CargarRegistroMp(archivo));
+            }
+
+            this.ListBD = CargarListaBD(this.Registro);
+
+            MercadoPagoBD mercadoPagoBD = new MercadoPagoBD();
+
+            foreach (MercadoPago mp in this.ListBD)
+            {
+                mercadoPagoBD.Update(mp);
+            }
+        }
+
         private RegistroMp CargarRegistroMp(SLDocument archivo)
         {
+            MercadoPagoBD mpBD = new MercadoPagoBD();
             RegistroMp aux = new RegistroMp();
 
             aux.date_created = archivo.GetCellValueAsString(this.iRow, 1);
@@ -144,57 +264,9 @@ namespace PruebasPS
             aux.pos_id = archivo.GetCellValueAsString(this.iRow, 41);
             aux.external_id = archivo.GetCellValueAsString(this.iRow, 42);
             aux.financing_fee = archivo.GetCellValueAsString(this.iRow, 43);
+            aux.EstadoBD = mpBD.ConsultaEstadoRegistro(aux.external_reference).ToString();
 
             return aux;
-        }
-
-        private void RecorrerArchivo(SLDocument archivo)
-        {
-            for (this.iRow = 2; this.iRow <= this.cantFilas; this.iRow++)
-            {
-                this.Registro.Add(CargarRegistroMp(archivo));
-            }
-        }
-
-        private bool ValidarArchivo(SLDocument archivo)
-        {
-            bool resultado = false;
-
-            for (this.iCol = 1; this.iCol <= this.cantColumnas; this.iCol++)
-            {
-                string valor = archivo.GetCellValueAsString(1, this.iCol); //Recorremos el archivo celda por celda y obtenemos su respectivo valor
-
-                if (valor == nombresColsCorrectas[this.iCol-1])
-                {
-                    resultado = true;
-                }
-                else
-                {
-                    return false;
-                }
-            }
-
-            return resultado;
-        }
-
-        private void CargarLista(SLDocument archivo)
-        {
-            ContarFilasColumnasArchivo(archivo);
-
-            if (ValidarArchivo(archivo))
-            {
-                RecorrerArchivo(archivo);
-
-                dgvRegistrosMp.DataSource = this.Registro;
-                dgvRegistrosMp.DataBind();
-                dgvRegistrosMp.Visible = true;
-
-                MostrarMensaje("La operación se ha completado correctamente!", "OK");
-            }
-            else
-            {
-                MostrarMensaje("Archivo inválido. Verifique que las columnas del archivo sean las correctas.", "ERROR");
-            }
         }
 
         private List<MercadoPago> CargarListaBD(List<RegistroMp> ExcelRegistroMP)
@@ -203,99 +275,36 @@ namespace PruebasPS
 
             foreach(RegistroMp list in ExcelRegistroMP)
             {
-                MercadoPago mp = new MercadoPago();
+                if (list.EstadoBD == "PENDIENTE")
+                {
+                    MercadoPago mp = new MercadoPago();
 
-                mp.Mepa_idmercadopago = list.external_reference;
-                mp.Mepa_payment_id = long.Parse(list.operation_id);
-                mp.Mepa_status = list.status;
-                mp.Mepa_status_detail = list.status_detail;
-                mp.Mepa_operation_type = list.operation_type;
-                mp.Mepa_merchant_order_id = long.Parse(list.merchant_order_id);
-                mp.Mepa_installments = int.Parse(list.installments);
-                mp.Mepa_payment_type_id = list.payment_type;
-                if (mp.Mepa_payment_type_id == "debit_card") mp.Mepa_payment_method_id = "debvisa";
-                else if (mp.Mepa_payment_type_id == "credit_card") mp.Mepa_payment_method_id = "visa";
-                else if (mp.Mepa_payment_type_id == "account_money") mp.Mepa_payment_method_id = "account_money";
-                else mp.Mepa_payment_method_id = "consumer_credits";
-                mp.Mepa_transaction_amount = double.Parse(list.transaction_amount);
-                mp.Mepa_total_paid_amount = double.Parse(list.transaction_amount);
-                mp.Mepa_net_received_amount = double.Parse(list.net_received_amount);
-                mp.Mepa_transaction_amount_refunded = double.Parse(list.amount_refunded);
-                mp.Mepa_overpaid_amount = double.Parse(list.amount_refunded);
-                mp.Mepa_installment_amount = (mp.Mepa_transaction_amount / mp.Mepa_installments);
-                mp.Mepa_estado_operacion = "APROBADA";
-                mp.Mepa_chk_return = "SI";
+                    mp.Mepa_idmercadopago = list.external_reference;
+                    mp.Mepa_payment_id = long.Parse(list.operation_id);
+                    mp.Mepa_status = list.status;
+                    mp.Mepa_status_detail = list.status_detail;
+                    mp.Mepa_operation_type = list.operation_type;
+                    mp.Mepa_merchant_order_id = long.Parse(list.merchant_order_id);
+                    mp.Mepa_installments = int.Parse(list.installments);
+                    mp.Mepa_payment_type_id = list.payment_type;
+                    if (mp.Mepa_payment_type_id == "debit_card") mp.Mepa_payment_method_id = "debvisa";
+                    else if (mp.Mepa_payment_type_id == "credit_card") mp.Mepa_payment_method_id = "visa";
+                    else if (mp.Mepa_payment_type_id == "account_money") mp.Mepa_payment_method_id = "account_money";
+                    else mp.Mepa_payment_method_id = "consumer_credits";
+                    mp.Mepa_transaction_amount = double.Parse(list.transaction_amount);
+                    mp.Mepa_total_paid_amount = double.Parse(list.transaction_amount);
+                    mp.Mepa_net_received_amount = double.Parse(list.net_received_amount);
+                    mp.Mepa_transaction_amount_refunded = double.Parse(list.amount_refunded);
+                    mp.Mepa_overpaid_amount = double.Parse(list.amount_refunded);
+                    mp.Mepa_installment_amount = (mp.Mepa_transaction_amount / mp.Mepa_installments);
+                    mp.Mepa_estado_operacion = "APROBADA";
+                    mp.Mepa_chk_return = "SI";
 
-                ListBD.Add(mp);
+                    ListBD.Add(mp);
+                }
             }
 
             return ListBD;
-        }
-
-      
-
-         
-
-        
-
-        private void AbrirArchivo(string path)
-        {
-            try
-            {
-                SLDocument archivo = new SLDocument(@"" + path); //Abrimos el archivo que se acaba de guardar
-
-                string hoja1 = archivo.GetSheetNames()[0].ToString(); //Obtenemos el nombre de la primera hoja del archivo
-                archivo.SelectWorksheet(hoja1); //Seleccionamos esa hoja
-
-                CargarLista(archivo);
-            }
-            catch
-            {
-                MostrarMensaje("Error al abrir el archivo.", "ERROR");
-            }
-        }
-        
-        protected void BtnProcesarArchivo_Click(object sender, EventArgs e)
-        {
-            if (CargarArchivo.HasFile) //Validamos que se halla seleccionado algún archivo
-            {
-                string extension = System.IO.Path.GetExtension(CargarArchivo.FileName); //Obtenemos la extension del archivo seleccionado
-                string fileName = CargarArchivo.FileName;
-                extension = extension.ToLower();
-
-                int tam = CargarArchivo.PostedFile.ContentLength; //Obtenemos el tamaño del archivo seleccionado
-
-                if (extension == ".xlsx" || extension == ".xls") //Validamos el formato del archivo seleccionado
-                {
-                    if (tam <= 1048576) //Validamos su tamaño (en bytes)
-                    {
-                        string path = "~/Planillas_Subidas/Libro1"+extension;
-                        CargarArchivo.SaveAs(Server.MapPath(path)); //Guardamos el archivo seleccionado en la carpeta 
-                        path = Server.MapPath(path);
-
-                        if (extension == ".xls")
-                        {
-                            var workbook = new Workbook(path);
-                            path = path.Replace(".xls", ".xlsx");
-                            workbook.Save(path);
-                        }
-
-                        AbrirArchivo(path);
-                    }
-
-
-                }
-                if (extension == ".csv")
-                {
-                    MostrarMensaje("Sólo se permiten archivos con extension '.xls' ó '.xlsx'.", "ERROR");
-                }
-            }
-            else
-            {
-                MostrarMensaje("No se seleccionó ningún archivo.", "ERROR");
-            }
-
-         
         }
 
         private void MostrarMensaje(string mensaje, string tipoMensaje)
@@ -303,25 +312,17 @@ namespace PruebasPS
             if (tipoMensaje == "ERROR")
             {
                 LblMensaje.ForeColor = System.Drawing.Color.Red;
-                dgvRegistrosMp.Visible = false;
+                dgvRegistrosActualizados.Visible = false;
             }
             if (tipoMensaje == "OK")
             {
                 LblMensaje.ForeColor = System.Drawing.Color.Green;
-                dgvRegistrosMp.Visible = true;
+                dgvRegistrosActualizados.Visible = true;
             }
             LblMensaje.Text = mensaje;
             LblMensaje.Visible = true;
         }
     }
 }
-
-/*
- *  1) Recorrer la lista (foreach) e ir consultando cada registro con la BD y asignando el estado de las mismas
-       en cada registro, en la propiedad "estado".
-    2) Recorrer la lista (foreach) y los que tienen "estado" = Pendiente/Cancelado, cargar los datos correspondientes
-       en la BD.
-    3) Mostrar cartel aclaratorio informando si la operación se completo correctamente o no.
-*/
 
 
