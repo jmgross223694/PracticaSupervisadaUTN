@@ -12,11 +12,12 @@ using Dominio;
 using Negocio;
 using Workbook = Aspose.Cells.Workbook;
 
+
 namespace PruebasPS
 {
     public partial class AnalizarExcel : System.Web.UI.Page
     {
-        private List<RegistroMp> listaMp = new List<RegistroMp>();
+        private List<RegistroMp> Registro = new List<RegistroMp>();
         private int iRow = 1, iCol = 1, cantFilas = 0, cantColumnas = 0;
         private string[] nombresColsCorrectas = {
             "Fecha de compra (date_created)",
@@ -70,11 +71,7 @@ namespace PruebasPS
             {
                 //mostrar todo lo que haya que mostrar.
 
-                MercadoPagoBD mpNegocio = new MercadoPagoBD();
-                MercadoPago mp = new MercadoPago("47514", "2020-12-09", "23:51:13-03:00", "1111", 2296530508215, "approved", "78558", 491756239753, "regular_payment", "debvisa", "debit_card", "accredited", 1, null, "245577091-2e1e96c4-b733-4177-b936-46a3ed324c67", 10000, 0, 10000, 10000, 0, 10000, 42173134, null, "IMPAGO", DateTime.Now.ToString("yyyy/MM/dd"), "23:51:13-03:00", 10000, "NO", "APROBADA", "SI", "NO");
-                //basura                                                                                                                                                                                                                                                //basura                         //basura                                                                                             
-
-                mpNegocio.Update(mp);
+              
             }
             else
             {
@@ -148,8 +145,6 @@ namespace PruebasPS
             aux.external_id = archivo.GetCellValueAsString(this.iRow, 42);
             aux.financing_fee = archivo.GetCellValueAsString(this.iRow, 43);
 
-           
-
             return aux;
         }
 
@@ -157,7 +152,7 @@ namespace PruebasPS
         {
             for (this.iRow = 2; this.iRow <= this.cantFilas; this.iRow++)
             {
-                this.listaMp.Add(CargarRegistroMp(archivo));
+                this.Registro.Add(CargarRegistroMp(archivo));
             }
         }
 
@@ -190,7 +185,7 @@ namespace PruebasPS
             {
                 RecorrerArchivo(archivo);
 
-                dgvRegistrosMp.DataSource = this.listaMp;
+                dgvRegistrosMp.DataSource = this.Registro;
                 dgvRegistrosMp.DataBind();
                 dgvRegistrosMp.Visible = true;
 
@@ -201,6 +196,47 @@ namespace PruebasPS
                 MostrarMensaje("Archivo inválido. Verifique que las columnas del archivo sean las correctas.", "ERROR");
             }
         }
+
+        private List<MercadoPago> CargarListaBD(List<RegistroMp> ExcelRegistroMP)
+        {
+            List<MercadoPago> ListBD = new List<MercadoPago>();
+
+            foreach(RegistroMp list in ExcelRegistroMP)
+            {
+                MercadoPago mp = new MercadoPago();
+
+                mp.Mepa_idmercadopago = list.external_reference;
+                mp.Mepa_payment_id = long.Parse(list.operation_id);
+                mp.Mepa_status = list.status;
+                mp.Mepa_status_detail = list.status_detail;
+                mp.Mepa_operation_type = list.operation_type;
+                mp.Mepa_merchant_order_id = long.Parse(list.merchant_order_id);
+                mp.Mepa_installments = int.Parse(list.installments);
+                mp.Mepa_payment_type_id = list.payment_type;
+                if (mp.Mepa_payment_type_id == "debit_card") mp.Mepa_payment_method_id = "debvisa";
+                else if (mp.Mepa_payment_type_id == "credit_card") mp.Mepa_payment_method_id = "visa";
+                else if (mp.Mepa_payment_type_id == "account_money") mp.Mepa_payment_method_id = "account_money";
+                else mp.Mepa_payment_method_id = "consumer_credits";
+                mp.Mepa_transaction_amount = double.Parse(list.transaction_amount);
+                mp.Mepa_total_paid_amount = double.Parse(list.transaction_amount);
+                mp.Mepa_net_received_amount = double.Parse(list.net_received_amount);
+                mp.Mepa_transaction_amount_refunded = double.Parse(list.amount_refunded);
+                mp.Mepa_overpaid_amount = double.Parse(list.amount_refunded);
+                mp.Mepa_installment_amount = (mp.Mepa_transaction_amount / mp.Mepa_installments);
+                mp.Mepa_estado_operacion = "APROBADA";
+                mp.Mepa_chk_return = "SI";
+
+                ListBD.Add(mp);
+            }
+
+            return ListBD;
+        }
+
+      
+
+         
+
+        
 
         private void AbrirArchivo(string path)
         {
@@ -246,6 +282,8 @@ namespace PruebasPS
 
                         AbrirArchivo(path);
                     }
+
+
                 }
                 if (extension == ".csv")
                 {
@@ -256,6 +294,8 @@ namespace PruebasPS
             {
                 MostrarMensaje("No se seleccionó ningún archivo.", "ERROR");
             }
+
+         
         }
 
         private void MostrarMensaje(string mensaje, string tipoMensaje)

@@ -8,7 +8,7 @@ namespace Dominio
 {
     public class MercadoPago
     {
-        public string mepa_idmercadopago;
+        private string mepa_idmercadopago;
         private string mepa_fecha;
         private string mepa_hora;
         private string mepa_idalumno;
