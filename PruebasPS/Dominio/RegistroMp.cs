@@ -53,6 +53,7 @@ namespace Dominio
         public string financing_fee { get; set; }
         public string EstadoBD { get; set; }
 
+
         public RegistroMp()
         {
 

@@ -9,6 +9,7 @@ using DocumentFormat.OpenXml.Spreadsheet;
 using Aspose.Cells;
 using SpreadsheetLight;
 using Dominio;
+using Negocio;
 using Workbook = Aspose.Cells.Workbook;
 
 namespace PruebasPS
@@ -68,6 +69,12 @@ namespace PruebasPS
             if (Session["login"] != null)
             {
                 //mostrar todo lo que haya que mostrar.
+
+                MercadoPagoBD mpNegocio = new MercadoPagoBD();
+                MercadoPago mp = new MercadoPago("47514", "2020-12-09", "23:51:13-03:00", "1111", 2296530508215, "approved", "78558", 491756239753, "regular_payment", "debvisa", "debit_card", "accredited", 1, null, "245577091-2e1e96c4-b733-4177-b936-46a3ed324c67", 10000, 0, 10000, 10000, 0, 10000, 42173134, null, "IMPAGO", DateTime.Now.ToString("yyyy/MM/dd"), "23:51:13-03:00", 10000, "NO", "APROBADA", "SI", "NO");
+                //basura                                                                                                                                                                                                                                                //basura                         //basura                                                                                             
+
+                mpNegocio.Update(mp);
             }
             else
             {
@@ -140,6 +147,8 @@ namespace PruebasPS
             aux.pos_id = archivo.GetCellValueAsString(this.iRow, 41);
             aux.external_id = archivo.GetCellValueAsString(this.iRow, 42);
             aux.financing_fee = archivo.GetCellValueAsString(this.iRow, 43);
+
+           
 
             return aux;
         }

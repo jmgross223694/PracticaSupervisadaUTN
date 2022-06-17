@@ -10,3 +10,9 @@ C:\Users\Juanma\Desktop\GitHub\PracticaSupervisadaUTN\PruebasPS\Dominio\obj\Debu
 C:\Users\Juanma\Desktop\GitHub\PracticaSupervisadaUTN\PruebasPS\Dominio\obj\Debug\Dominio.csproj.CoreCompileInputs.cache
 C:\Users\Juanma\Desktop\GitHub\PracticaSupervisadaUTN\PruebasPS\Dominio\obj\Debug\Dominio.dll
 C:\Users\Juanma\Desktop\GitHub\PracticaSupervisadaUTN\PruebasPS\Dominio\obj\Debug\Dominio.pdb
+C:\Users\xxxx\OneDrive - frgp.utn.edu.ar\Escritorio\Repositorio Github\Practicas\PracticaSupervisadaUTN\PruebasPS\Dominio\bin\Debug\Dominio.dll
+C:\Users\xxxx\OneDrive - frgp.utn.edu.ar\Escritorio\Repositorio Github\Practicas\PracticaSupervisadaUTN\PruebasPS\Dominio\bin\Debug\Dominio.pdb
+C:\Users\xxxx\OneDrive - frgp.utn.edu.ar\Escritorio\Repositorio Github\Practicas\PracticaSupervisadaUTN\PruebasPS\Dominio\obj\Debug\Dominio.csprojAssemblyReference.cache
+C:\Users\xxxx\OneDrive - frgp.utn.edu.ar\Escritorio\Repositorio Github\Practicas\PracticaSupervisadaUTN\PruebasPS\Dominio\obj\Debug\Dominio.csproj.CoreCompileInputs.cache
+C:\Users\xxxx\OneDrive - frgp.utn.edu.ar\Escritorio\Repositorio Github\Practicas\PracticaSupervisadaUTN\PruebasPS\Dominio\obj\Debug\Dominio.dll
+C:\Users\xxxx\OneDrive - frgp.utn.edu.ar\Escritorio\Repositorio Github\Practicas\PracticaSupervisadaUTN\PruebasPS\Dominio\obj\Debug\Dominio.pdb
