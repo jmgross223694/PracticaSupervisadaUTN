@@ -14,38 +14,26 @@ namespace PruebasPS
         protected void Page_Load(object sender, EventArgs e)
         {
 
-
         }
 
         protected void BtnIngresar_Click(object sender, EventArgs e)
         {
             bool estado = false;
-            UsuarioBD perfil = new UsuarioBD();
-            Usuario user = new Usuario();
+            UsuarioBD uBD = new UsuarioBD();
 
-            estado = perfil.verificarUsuario(txtUser.Text.Trim(), txtPassword.Text.Trim());
-            if (estado == true)
+            string usuario = txtUser.Text.Trim(), clave = txtPassword.Text.Trim();
+
+            estado = uBD.verificarUsuario(usuario, clave);
+
+            if (estado)
             {
-
-                //  Session["NombreUsuario"] = txtUser.Text.Trim();
-
-
-                // user.UsuarioMp=(txtUser.Text);
-
-
                 LblMensaje.Visible = false;
                 
-                    Session.Add("login", "correcto");
+                Session.Add("NombreUsuario", usuario);
                 Response.Redirect("Index.aspx", true);
-
-
-
-
             }
-
             else
             {
-
                 LblMensaje.Text = "Credenciales inválidas";
                 LblMensaje.Visible = true;
             }

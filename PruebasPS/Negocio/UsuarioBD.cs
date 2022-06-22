@@ -15,15 +15,16 @@ namespace Negocio
 
         public bool verificarUsuario(string Usuario, string Password)
         {
-            Usuario user= new Usuario();
+            Usuario user = new Usuario();
 
-            user.UsuarioMp=Usuario;
-            user.Password= Password;
-            DB select = new DB();
+            user.UsuarioMp = Usuario;
+            user.Password = Password;
 
             bool estado = false;
-                  string    consulta =
-               "SELECT usua_user, usua_password from susuarios where usua_user = '" + Usuario + "'   and usua_password = '" + Password + "'";
+            string consulta ="SELECT usua_user, usua_password from susuarios " +
+                             "where usua_user = '" + Usuario + "' " +
+                             "and usua_password = '" + Password + "' " +
+                             "and usua_baja = '0'";
 
             try
             {
@@ -33,7 +34,6 @@ namespace Negocio
                 if (conex.Lector.Read())
                 {
                     estado = true;
-                    HttpContext.Current.Session["NombreUsuario"] = Usuario;
                 }
             }
             catch
@@ -45,8 +45,6 @@ namespace Negocio
                 conex.CerrarConexion();
             }
             return estado;
-
-           
         }
     }
 }

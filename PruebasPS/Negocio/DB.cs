@@ -16,9 +16,9 @@ namespace Negocio
         public DB()
         {
             string server = "localhost";
-            string database = "BDutn"; //Cambiar por nombre de su DB
+            string database = "PruebasPS"; //Cambiar por nombre de su DB
             string user = "postgres";
-            string password = "root"; //Cambiar por la clave que generaron
+            string password = "1"; //Cambiar por la clave que generaron
             string port = "5432";
 
             string stringConnection = "server=" + server + ";" + "port=" + port + ";" + "user id=" +
