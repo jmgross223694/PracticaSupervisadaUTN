@@ -16,3 +16,9 @@ C:\Users\xxxx\OneDrive - frgp.utn.edu.ar\Escritorio\Repositorio Github\Practicas
 C:\Users\xxxx\OneDrive - frgp.utn.edu.ar\Escritorio\Repositorio Github\Practicas\PracticaSupervisadaUTN\PruebasPS\Dominio\obj\Debug\Dominio.csproj.CoreCompileInputs.cache
 C:\Users\xxxx\OneDrive - frgp.utn.edu.ar\Escritorio\Repositorio Github\Practicas\PracticaSupervisadaUTN\PruebasPS\Dominio\obj\Debug\Dominio.dll
 C:\Users\xxxx\OneDrive - frgp.utn.edu.ar\Escritorio\Repositorio Github\Practicas\PracticaSupervisadaUTN\PruebasPS\Dominio\obj\Debug\Dominio.pdb
+C:\Users\altam\Source\Repos\PracticaSupervisadaUTN\PruebasPS\Dominio\bin\Debug\Dominio.dll
+C:\Users\altam\Source\Repos\PracticaSupervisadaUTN\PruebasPS\Dominio\bin\Debug\Dominio.pdb
+C:\Users\altam\Source\Repos\PracticaSupervisadaUTN\PruebasPS\Dominio\obj\Debug\Dominio.csprojAssemblyReference.cache
+C:\Users\altam\Source\Repos\PracticaSupervisadaUTN\PruebasPS\Dominio\obj\Debug\Dominio.csproj.CoreCompileInputs.cache
+C:\Users\altam\Source\Repos\PracticaSupervisadaUTN\PruebasPS\Dominio\obj\Debug\Dominio.dll
+C:\Users\altam\Source\Repos\PracticaSupervisadaUTN\PruebasPS\Dominio\obj\Debug\Dominio.pdb

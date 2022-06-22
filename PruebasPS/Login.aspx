@@ -30,6 +30,11 @@
                 <asp:TextBox ID="txtPassword" runat="server" CssClass="form-control" placeholder="*****" type="password" MaxLength="20" />
             </div>
 
+            <br/>      
+            <asp:Label ID="LblMensaje" Visible="false" Text="" runat="server" CssClass="lbl-mensaje-login" /> 
+           
+            
+            <br/><br/>
             <asp:Button ID="btnIngresar" runat="server" CssClass="btn btn-primary" Text="Iniciar Sesión" OnClick="BtnIngresar_Click" />
                             
         </div>

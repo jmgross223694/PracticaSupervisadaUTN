@@ -126,3 +126,8 @@
     text-shadow: black 0.1em 0.1em 1.9em;
 }
 
+.lbl-mensaje-login {
+    font-size: 16px;
+    text-shadow: black 0.1em 0.1em 1.9em;
+    color:#ff0000;
+}
