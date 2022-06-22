@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Npgsql;
 using Dominio;
-
+using System.Web;
 
 namespace Negocio
 {
@@ -33,6 +33,7 @@ namespace Negocio
                 if (conex.Lector.Read())
                 {
                     estado = true;
+                    HttpContext.Current.Session["NombreUsuario"] = Usuario;
                 }
             }
             catch

@@ -11,11 +11,13 @@ namespace PruebasPS
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            if (Session["login"] != null)
+            if (Session["NombreUsuario"] != null)
             {
                 BtnExcel.Visible = true;
                 BtnReporte1.Visible = true;
                 BtnReporte2.Visible = true;
+                LblUsuario.Text += Session["NombreUsuario"].ToString();
+                LblUsuario.Visible = true;
             }
             else
             {

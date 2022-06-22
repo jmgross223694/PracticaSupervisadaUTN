@@ -64,6 +64,7 @@
                     </ul>
                     <a align="right" >
                         <asp:Button ID="BtnLogin" Visible="false" Text="Login" runat="server" Class="btn-login" OnClick="BtnLogin_Click"/>
+                       
                         <asp:Button ID="BtnCerrarSesion" Visible="false" Text="Cerrar Sesión" runat="server" Class="btn-cerrar-sesion" OnClick="BtnCerrarSesion_Click" />
                     </a>
                 </div>

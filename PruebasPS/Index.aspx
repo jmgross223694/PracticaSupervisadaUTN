@@ -1,6 +1,6 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="Index.aspx.cs" Inherits="PruebasPS.Index" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
-
+   
     <style>
         body {            
             background-image: url("../img/fondo-body.jpg");
@@ -13,9 +13,9 @@
     </style>
 
     <center>
-
+       <h1>  <asp:Label ID="LblUsuario" Visible="true" Text="Bienvenido " runat="server" CssClass="lbl-nombre-usuario" /> </h1>
         <h1 class="index-h1">Inicio</h1>
-
+        
         <br /><br />
 
         <div class="index-botonera">  
