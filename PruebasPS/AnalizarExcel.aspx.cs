@@ -68,7 +68,7 @@ namespace PruebasPS
 
         protected void Page_Load(object sender, EventArgs e)
         {
-            if (Session["login"] != null)
+            if (Session["NombreUsuario"] != null)
             {
                 //mostrar todo lo que haya que mostrar.
             }
@@ -145,10 +145,17 @@ namespace PruebasPS
             {
                 RecorrerArchivo(archivo);
 
-                List<string> listaDgv = new List<string>();
+                List<ListadoResultado> listaDgv = new List<ListadoResultado>();
                 foreach (MercadoPago mp in this.ListBD)
                 {
-                    listaDgv.Add(mp.Mepa_idmercadopago);
+                    ListadoResultado aux = new ListadoResultado();
+
+                    aux.Operation_Date = mp.Mepa_fecha;
+                    aux.Payment_ID = mp.Mepa_payment_id.ToString();
+                    aux.External_Reference = mp.Mepa_idmercadopago;
+                    aux.Transaction_Amount = mp.Mepa_transaction_amount.ToString();
+
+                    listaDgv.Add(aux);
                 }
 
                 dgvRegistrosActualizados.DataSource = listaDgv;
@@ -279,6 +286,7 @@ namespace PruebasPS
                 {
                     MercadoPago mp = new MercadoPago();
 
+                    mp.Mepa_fecha = list.date_created;
                     mp.Mepa_idmercadopago = list.external_reference;
                     mp.Mepa_payment_id = long.Parse(list.operation_id);
                     mp.Mepa_status = list.status;

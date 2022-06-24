@@ -19,6 +19,11 @@
 
         <div>
             <div class="excel-cargar-archivo">
+
+                <asp:Label Text="(Sólo se permiten archivos '.xls / .xlsx')" runat="server" />
+
+                <br /><br />
+
                 <asp:FileUpload ID="CargarArchivo" runat="server" accept=".xls,.xlsx" ToolTip="Seleccione un archivo Excel" />
             </div>
 
