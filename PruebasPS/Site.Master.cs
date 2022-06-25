@@ -16,7 +16,7 @@ namespace PruebasPS
             BtnLogin.Visible = false;
             BtnInicio.Visible = false;
 
-            if (Session["login"] != null)
+            if (Session["NombreUsuario"] != null)
             {
                 if (pagina == "https://localhost:44395/AnalizarExcel.aspx"
                     || pagina == "https://localhost:44395/Reporte1.aspx"

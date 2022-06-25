@@ -11,9 +11,9 @@ namespace PruebasPS
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            if (Session["error"] != null)
+            if (Session["Error"] != null)
             {
-                lblMensaje.Text = Session["error"].ToString();
+                lblMensaje.Text = Session["Error"].ToString();
             }
         }
     }

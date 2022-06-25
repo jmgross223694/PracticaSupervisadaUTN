@@ -11,7 +11,7 @@ namespace PruebasPS
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            if (Session["login"] != null)
+            if (Session["NombreUsuario"] != null)
             {
                 //mostrar todo lo que haya que mostrar.
             }

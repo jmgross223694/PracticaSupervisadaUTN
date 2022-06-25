@@ -37,8 +37,6 @@ namespace PruebasPS
                 LblMensaje.Text = "Credenciales inválidas";
                 LblMensaje.Visible = true;
             }
-
-
         }
     }
 }

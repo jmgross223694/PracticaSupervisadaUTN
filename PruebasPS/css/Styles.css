@@ -131,3 +131,23 @@
     text-shadow: black 0.1em 0.1em 1.9em;
     color:#ff0000;
 }
+
+.excel-btn-procesar-archivo {
+    border-radius: 50px;
+    border: solid 1px;
+    color: #FFFFFF;
+    background-color: #286090;
+    -webkit-transition-duration: 0.4s;
+    transition-duration: 0.4s;
+    font-weight: 600;
+    text-shadow: black 0.1em 0.1em 1.9em;
+    box-shadow: 0 4px 6px -6px black;
+    font-size: 15px;
+    padding: 4px;
+    margin-top: 10px;
+}
+
+.excel-btn-procesar-archivo:hover {
+    color: #286090;
+    background-color: #FFFFFF;
+}
